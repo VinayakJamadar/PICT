@@ -1,0 +1,77 @@
+#cardsSection{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-top: 60px;
+}
+
+/* Cards */
+
+#cardsSection .card{
+    border-radius: 10px;
+    width: 25rem;
+    margin: 1.5rem;
+    background-color: transparent;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#cardsSection .card-title{
+    text-align: center;
+    border-radius: 8px;
+    padding: 0.8rem;
+    font-family: 'Work Sans';
+    font-weight: 500;
+    color: rgb(1, 61, 100);
+    background-color: rgb(255, 169, 0);
+}
+
+#cardsSection .card-text{
+    margin: 0.8rem 0;
+    text-align: center;
+    font-family: 'Montserrat';
+    font-weight: 500;
+}
+
+#cardsSection .card-body{
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+}
+
+#cardsSection .card-details{
+    width: 60%;
+}
+
+#cardsSection .button-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0.1rem;
+}
+
+#cardsSection .button-container .button{
+    color: #fff;
+    background-color: rgb(0, 96, 161);
+    border-color: rgb(0, 96, 161);
+    width: 100%;
+    font-weight: 500;
+    font-family: 'Montserrat';
+}
+
+#cardsSection .button-container .button:hover{
+    background-color: rgb(1, 61, 100);
+    border-color: rgb(1, 61, 100);
+}
+
+#cardsSection .chart-container{
+    align-self: center;
+    width: 40%; 
+    max-width:600px;
+}
+
+#cardsSection .chart-container > div{
+    margin: auto;
+}

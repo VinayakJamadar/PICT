@@ -1,0 +1,9 @@
+export { default as Home } from "./Home";
+export { default as Login } from "./Login";
+export { default as Signup } from "./Signup";
+export { default as Profile } from "./Profile";
+export { default as Coin } from "./Coin";
+export { default as Marketplace } from "./Marketplace";
+export { default as Myinvestment } from "./Myinvestment";
+export { default as Addprojects } from "./Addprojects";
+export { default as Myprojects } from "./Myprojects";

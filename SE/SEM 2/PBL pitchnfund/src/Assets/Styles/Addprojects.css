@@ -1,0 +1,105 @@
+#Addprojects-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100vh;
+    flex-direction: column;
+    background-color: transparent;
+}
+
+#Addprojects-form {
+    background-color: transparent;
+    box-shadow: 4px 4px 4px 4px hsl(203, 12%, 78%);
+    padding: 2%;
+    flex-direction: column;
+    height: 72%;
+    width: 40%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 2.5%;
+}
+
+#Addprojects-form .Addprojects-form-labels {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    margin: 1% 0;
+}
+
+#Addprojects-form .Addprojects-form-heading {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 700;
+    color: rgb(0, 96, 161);
+    text-decoration-line: underline;
+    text-underline-offset: 4.5px;
+    text-decoration-thickness: 3px;
+    text-decoration-color: rgb(255, 184, 42);
+}
+
+#Addprojects-form .Addprojects-title-input {
+    text-align: center;
+    height: 7%;
+    width: 90%;
+    border: none;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    border: 1px solid hsl(205, 14%, 83%);
+    box-shadow: inset 2.5px 2.5px 2.5px hsl(205, 14%, 83%);
+    border-radius: 1%;
+}
+
+#Addprojects-form .Addprojects-input {
+    text-align: center;
+    height: 7%;
+    border: 1px solid hsl(205, 14%, 83%);
+    box-shadow: inset 2.5px 2.5px 2.5px hsl(205, 14%, 83%);
+    width: 90%;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    border-radius: 2.5%;
+}
+
+#Addprojects-form .Addprojects-description {
+    width: 90%;
+    text-align: center;
+    height: 20%;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    border: 1px solid hsl(205, 14%, 83%);
+    box-shadow: inset 2.5px 2.5px 2.5px hsl(205, 14%, 83%);
+    border-radius: 2.5%;
+    margin-bottom: 3px;
+}
+
+#Addprojects-form textarea {
+    resize: none;
+}
+
+#Addprojects-form .Addprojects-btn {
+    margin: 2% 0;
+    width: 90%;
+    background-color: rgb(0, 96, 161);
+    color: white;
+    font-size: 1rem;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+
+}
+
+#Addprojects-form .Addprojects-btn:hover {
+    background-color: rgb(255, 184, 42);
+}
+
+@media (max-width: 700px) {
+    #Addprojects-form {
+        width: 90%;
+    }
+
+    #Addprojects-form .Addprojects-description {
+        height: 20%;
+    }
+
+}

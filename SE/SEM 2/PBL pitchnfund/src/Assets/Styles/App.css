@@ -1,0 +1,560 @@
+/* Default */
+
+*{
+    margin: 0;
+    padding: 0;
+  }
+  
+  ul{
+    list-style: none;
+  }
+  
+  .App {
+    font-family: sans-serif;
+    text-align: center;
+    background-size: cover;
+  }
+  
+  .container-fluid {
+    background-color: #ffffff;
+    padding-left: 0;
+    padding-right: 0;
+    background-image: url("../Images/Background.jpg");
+    min-height: 100vh;
+  }
+
+  
+  .home_hr{
+    margin: 3% auto;
+    width: 50%;
+    background-color: #8f8f8f;
+  }
+  
+  .home_hr:not([size]) {
+    height: 3px;
+  }
+
+  .hr_margin {
+    margin-top: 5%;
+    margin-bottom: 0%;
+  }
+
+  .hr_margin_top {
+    margin-top: 0%;
+  }
+
+  /* header */
+  
+  #homepage-header {
+    position: fixed;
+    top: 0px;
+    background-color: white;
+    width: 100%;
+    z-index: 99;
+    box-shadow: 0 1px 5px rgb(159 114 255 / 20%);
+  }
+
+  #homepage-header #homepage_brand {
+    display: flex;
+    align-items: center;
+  }
+
+  #homepage-header #homepage_logo {
+    width: 12%;
+    height: 12%;
+  }
+  
+  #homepage-header #homepage-container{
+    width: 100%;
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 5%;
+  }
+  
+  #homepage-header a {
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0 0.5rem;
+    font-weight: 500;
+    color: rgb(38, 19, 106);
+  }
+  
+  #homepage-header a:hover {
+    color: rgb(255, 169, 0);
+  }
+  
+  #homepage-header .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  
+  #homepage-header .navbar {
+    padding: 1% 0;
+    max-width: 100%;
+  }
+  
+  #homepage-header .navbar-nav {
+    margin-left: auto;
+    text-align: center;
+  }
+  
+  #homepage-header .navbar-nav .nav-link {
+    padding: 0 1%;
+    color: rgb(38, 19, 106);
+  }
+  
+  #homepage-header .navbar-toggler:focus {
+    box-shadow: none;
+  }
+  
+  #homepage-header .container{
+    margin: 0 60px;
+  }
+  
+  @media only screen and (max-width: 992px){
+    #homepage-header .container{
+      max-width: 920px;
+      padding: 0 2%;
+    }
+
+    #homepage-header #homepage_logo {
+      width: 8%;
+      height: 8%;
+    }
+  }
+  
+  @media only screen and (max-width: 398px){
+    #homepage-header .navbar-brand{
+      font-size: 1rem;
+    }
+
+    #homepage-header #homepage_brand {
+      width: 80%;
+    }
+  }
+  
+  /* Title */
+  
+  #title{
+    height: 750px;
+  }
+  
+  .row{
+    padding: 1% 5% 0 5%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+  }
+  
+  @media only screen and (max-width: 768px){
+    #title{
+      height: max-content;
+    }
+  }
+  
+  /* Title - Text */
+  
+  #title .title-text {
+    text-align: left;
+    justify-content: center;
+  }
+  
+  #title .heading {
+    color: rgb(38, 19, 106);
+    font-size: calc(3rem + 1.5vw);
+    font-weight: 700;
+    font-family: 'Work Sans', sans-serif;
+  }
+  
+  #title .sub-heading{
+    color: rgb(255, 169, 0);
+    font-size: 1.5rem;
+    font-family: 'Montserrat';
+    font-weight: bold;
+    margin: 20px 0;
+  }
+  
+  #title .download-button {
+    background-color: rgb(38, 19, 106);
+    border: none;
+    width: 28rem;
+    margin-top: 5%;
+    font-weight: 500;
+    font-family: 'Montserrat';
+  }
+  
+  #title .download-button:hover{
+    background-color: rgb(255, 169, 0);
+  }
+  
+  #title .features-list{
+    list-style-type: none;
+    position: relative;
+    margin-bottom: 24px;
+  }
+  
+  #title .features-list li {
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 24px;
+    font-weight: 500;
+    font-size: 19px;
+    color: black;
+  }
+  
+  #title .features-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    background: center / contain no-repeat url(../Images/Check.svg);
+    border-radius: 100%;
+  }
+  
+  @media only screen and (max-width: 360px){
+    #title .title-text .heading{
+      font-size: 45px;
+    }
+  }
+  
+  @media only screen and (max-width: 768px){
+    #title .download-button{
+      width: 100%;
+    }
+  }
+  
+  /* Title - Image */
+  
+  #title .title-image {
+    height: 65%;
+    width: 100%;
+    position: relative;
+    bottom: 8%;
+  }
+  
+  @media only screen and (max-width: 768px){
+    #title .title-image{
+      margin-top: 8%;
+    }
+  }
+  
+  @media (max-width: 576px){
+    #title .title-image {
+      margin-top: 20%;
+    }
+  }
+  
+  /* Process */
+  
+  #process{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  #process .process-heading{
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    color: #798b9a;
+    margin: 20px 0 30px 0;
+  }
+  
+  /* Process Steps for Investor */
+  
+  #investor-step{
+    color: rgb(38, 19, 106);
+  }
+  
+  /* Process Steps for Entrepreneur */
+  
+  #entrepreneur-step{
+    color: rgb(255, 169, 0);
+  }
+  
+  #timeline-element-title{
+    margin: 0;
+    font-size: 1.5rem;
+    margin-bottom: 1.5%;
+    font-family: 'Work Sans', sans-serif;
+  }
+  
+  #timeline-element-subtitle{
+    margin: 0;
+    font-size: 1.2rem;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+  }
+  
+  #timeline-element-icon{
+    background: rgb(33, 50, 107);
+    width: 30px;
+    height: 30px;
+    left: 51.3%;
+    color: white;
+  }
+  
+  @media only screen and (max-width: 1170px){
+    #timeline-element-content {
+      margin-left: 0;
+    }
+  
+    #investor-step{
+      color: white;
+    }
+    
+    #entrepreneur-step{
+      color: white;
+    }
+  }
+  
+  
+  @media only screen and (min-width: 1170px) {
+    #process .vertical-timeline.vertical-timeline--two-columns:before {
+      background-color: black;
+    }
+  
+    #timeline-element-content-arrow {
+      top: 8px;
+    }
+  
+    #investor-step, #entrepreneur-step {
+      top: -10px;
+    }
+  
+    #timeline-element :first-child{
+      margin-bottom: 0;
+    }
+  
+    #timeline-element {
+      margin: 0.5em 0;
+    }
+  }
+  
+  
+  /* BENEFITS */
+  
+  #benefits{
+    padding: 3% 5% 5% 5%;
+    background-color: transparent;
+    position: relative;
+    background-size: cover;
+  }
+  
+  #benefits .benefit-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    top: 10%;
+  }
+  
+  #benefits .benefit-heading{
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 30px;
+    font-weight: 800;
+    color: #798b9a;
+    padding-bottom: 4%;
+  }
+  
+  #benefits .benefit-subheading{
+    font-size: 1.5rem;
+    font-family: 'Montserrat';
+    font-weight: bold;
+    padding-bottom: 5%;
+  }
+  
+  #benefits .benefit-box{
+    text-align: center;
+    padding: 3%;
+  }
+  
+  #benefits .benefit-icon{
+    font-size: 4rem;
+    color: #0060a1;
+    margin-bottom: 5%; 
+  }
+  
+  #benefits .benefit-icon:hover{
+    color: #ffa900;
+  }
+  
+  #benefits .benefit-p{
+    color: #8f8f8f;
+  }
+
+  /* Team */
+
+  /* TEAM */
+#team {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 30px 0;
+}
+
+#team-heading {
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 30px;
+  font-weight: 800;
+  color: #798b9a;
+  margin-bottom: 3%;
+}
+
+#team .card {
+  position: relative;
+  width: 20rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 3px 3px #4682ab;
+  padding: 16px;
+  margin: 56px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#team .card-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 15px 35px -15px rgba(0, 0, 0, 0.5),
+      0 5px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+#team .card-image img {
+  width: 100%;
+  transform: scale(1.2);
+}
+
+#team p {
+  font-family: 'Work Sans';
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+#team .name {
+  font-family: 'Montserrat';
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: black;
+  margin-top: 80px;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+}
+
+#team .socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#team a {
+  margin: 12px 8px;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: opacity 0.4s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+#team a:hover {
+  opacity: 0.5;
+}
+
+#team a i {
+  color: #fff;
+  font-size: 1.4em;
+}
+
+/* Social media colors */
+#team a.github {
+  background-color: black;
+}
+
+#team a.twitter {
+  background-color: #0077b5;
+}
+
+#team a.pinterest {
+  background-color: #EA4335;
+}
+
+  
+  /* FOOTER */
+  
+  footer{
+    background-color: rgb(38, 19, 106);
+    color: white;
+    text-align: center;
+    padding: 6%;
+  }
+  
+  footer .quote-icon{
+    font-size: xx-large;
+    text-align: left;
+    margin-bottom: 0px;
+    padding-left: 20px;
+  }
+  
+  footer .quote-heading{
+    font-family: Montserrat;
+    font-size: 3rem;
+    font-weight: 500;
+    margin-bottom: 30px;
+  }
+  
+  footer .quote-line{
+    font-family: Montserrat;
+    font-size: 2rem;
+    font-weight: 400;
+    margin: 20px 0;
+  }
+  
+  footer .quote-symbol{
+    font-size: 100px;
+  }
+  
+  @media only screen and (max-width: 800px) {
+    footer .quote-icon{
+      text-align: center;
+      padding-left: 0;
+    }
+  
+    footer .quote-heading{
+      font-size: 2rem;
+      margin: 25px 0;
+    }
+  
+    footer .quote-line{
+      font-size: 1.4rem;
+      margin: 25px 0;
+    }
+  
+    footer .quote-symbol{
+      font-size: 70px;
+    }
+  }

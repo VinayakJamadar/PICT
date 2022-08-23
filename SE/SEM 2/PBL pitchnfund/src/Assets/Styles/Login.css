@@ -1,0 +1,129 @@
+#login_container {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#login_form {
+    width: 25rem;
+    margin: auto;
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    box-shadow: 0px 3px 3px 3px hwb(206 75% 19%), -1em 0 3em hsl(203, 12%, 78%);
+    border-radius: 15px;
+}
+
+#login_form #login_heading{
+    padding-top: 10px;
+    color: rgb(0, 96, 161);
+    font-family: "Work Sans", sans-serif;
+    font-weight: 700;
+}
+
+
+#login_form .login_hr {
+    margin: 0px;
+    height: 3px;
+    background-color: rgb(255, 184, 42);
+    width: 100%;
+    opacity: 100%;
+}
+
+#login_form .login_label {
+    justify-content: left;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 600;
+    margin: 10px;
+}
+
+#login_form .login_input {
+    font-family: "Work Sans", sans-serif;
+    font-weight: 400;
+    border-radius: 5px;
+    margin: 8px;
+    padding: 7px;
+    display: block;
+    border: none;
+    box-shadow: inset 1px 1px 1px 1px hsl(203, 12%, 78%);
+    width: 85%;
+}
+
+#login_form .login_user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#login_form .login_user .login_user_choice {
+    box-shadow: none;
+    width: 10%;
+    height: 40%;
+    margin: 0;
+    border-radius: 0;
+}
+
+#login_form #or {
+    position: relative;
+    width: 100%;
+    font-size: 15px;
+    font-weight: bold;
+    height: 13px;
+    line-height: 0px;
+    text-align: center;
+    margin: 5px;
+}
+
+#login_form #or::before, 
+#login_form #or::after {
+    position: absolute;
+    width: 45%;
+    height: 3px;
+    background-color: rgb(255, 184, 42);
+    content: "";
+}
+
+#login_form #or::before {
+    left: 0;
+}
+
+#login_form #or::after {
+    right: 0;
+}
+
+#login_form #invalid-user{
+    color: red;
+    margin: 0;
+}
+
+#login_form .login_buttons {
+    margin: 12px;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    width: 80%;
+    background-color: rgb(0, 96, 161);
+    border: 2px solid;
+}
+
+#login_form .login_buttons:hover {
+    background-color: rgb(255, 184, 42)
+}
+
+/* Media Quary for Mobile */
+@media (max-width: 450px) {
+    #login_form {
+        width: 90%;
+    }
+
+    #login_form .login_buttons {
+        width: 50vw;
+    }
+}
