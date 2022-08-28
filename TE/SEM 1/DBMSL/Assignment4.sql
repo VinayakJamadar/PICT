@@ -15,6 +15,9 @@ DELIMITER //
 -- 1062 -> Calling Procedure for Duplicate Roll No in Fine Table will throw Error 1062
 -- NOT FOUND --> Calling Procedure for Not Existing Roll No in Borrower Table will throw Error 'NOT FOUND'
 
+-- * CURDATE() -> Returns the Current Date
+-- * DATEDIFF(date1, date2) -> returns the number(INT) of days between two date values i.e (date1-date2)
+
 -- Creating Procedure calculateFine
 CREATE PROCEDURE calculateFine(IN rollNo INT)
 BEGIN 
