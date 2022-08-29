@@ -49,17 +49,19 @@ BEGIN
 	SET dateDifference = DATEDIFF(currentDate, issuedDate);
 
     IF (dateDifference > 15) THEN
-        SET amount = (dateDifference-15)*5;
         IF (dateDifference > 30) THEN
-            SET amount = amount + ((dateDifference-30)*50);
+            SET amount = (dateDifference-30)*50;
+            SET dateDifference = 30;
         END IF;
+        SET amount = (dateDifference-15)*5;
+        
         UPDATE Borrower SET Status = "R" WHERE Borrower.RollNo = rollNo;
         INSERT INTO Fine VALUES (rollNo, issuedDate, amount);
         SELECT CONCAT('Fine for Roll No ', rollNo, ' is Amount ', amount, ' Rs.') AS message;
     ELSE
         SELECT CONCAT('No Fine for Roll No ', rollNo) AS message;
     END IF;
-
+    
 END;
 //
 
