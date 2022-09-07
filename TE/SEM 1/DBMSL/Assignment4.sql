@@ -1,8 +1,8 @@
 -- Creating table Borrower
-CREATE TABLE Borrower(RollNo INT NOT NULL, Name VARCHAR(20) NOT NULL, DateOfIssue DATE NOT NULL, NameOfBook VARCHAR(40) NOT NULL, Status CHAR(1) DEFAULT 'I', PRIMARY KEY(RollNo));
+CREATE TABLE Borrower(RollNo INT NOT NULL, BorrowerName VARCHAR(20) NOT NULL, DateOfIssue DATE NOT NULL, NameOfBook VARCHAR(40) NOT NULL, Status CHAR(1) DEFAULT 'I', PRIMARY KEY(RollNo));
 
 -- Inserting record in Borrower table
-INSERT INTO Borrower(RollNo, Name, DateOfIssue, NameOfBook) VALUES (1, 'Vinayak Jamadar', '2022-07-30', 'Wings of Fire');
+INSERT INTO Borrower(RollNo, BorrowerName, DateOfIssue, NameOfBook) VALUES (1, 'Vinayak Jamadar', '2022-07-30', 'Wings of Fire');
 
 -- Creating table Fine
 CREATE TABLE Fine(RollNo INT NOT NULL, DateOfIssue Date NOT NULL, Amount INT, FOREIGN KEY(RollNo) REFERENCES Borrower(RollNo), UNIQUE(RollNo));
@@ -33,7 +33,7 @@ BEGIN
 
     DECLARE CONTINUE HANDLER FOR 1062
     BEGIN
-        SELECT CONCAT('Error due to inserting Duplicate Roll No ', rollNO, ' in Fine Table and Updating the Amount to ', amount) AS message;
+        SELECT CONCAT('Error due to inserting Duplicate Roll No ', rollNo, ' in Fine Table and Updating the Amount to ', amount) AS message;
         UPDATE Fine SET Fine.Amount = amount WHERE Fine.RollNo = rollNo;
     END;
 
