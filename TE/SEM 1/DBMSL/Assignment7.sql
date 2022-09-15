@@ -11,15 +11,41 @@ CREATE TABLE Library_Audit(BookId INT NOT NULL, BookName VARCHAR(30) NOT NULL, B
 -- Change Delimiter from ';' to '//'
 DELIMITER //
 
+-- Trigger for Before Insert
+CREATE TRIGGER BeforeInsertTrigger
+BEFORE INSERT
+ON Library FOR EACH ROW
+BEGIN
+    IF (NEW.BookId < 0) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Book Id Cannot be Negative';
+    ELSEIF (NEW.BookName = NULL) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Book Name Cannot be NULL';
+    ELSEIF (NEW.BookEdition < 0) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Book Edition Cannot be Negative';
+    ELSEIF (NEW.BookQuantity < 0) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Book Quantity Cannot be Negative';
+    END IF;
+END //
+
+-- Trigger for After Insert
+CREATE TRIGGER AfterInsertTrigger
+AFTER INSERT
+ON Library FOR EACH ROW
+BEGIN
+    INSERT INTO Library_Audit VALUES (NEW.BookId, NEW.BookName, NEW.BookEdition, NEW.BookQuantity, "Insert", CURRENT_USER(), CURRENT_TIMESTAMP());
+END //
+
 
 -- Trigger for Before Update
-CREATE TRIGGER UpdateTrigger
+CREATE TRIGGER BeforeUpdateTrigger
 BEFORE UPDATE 
 ON Library FOR EACH ROW  
 BEGIN
     -- * Error Handling using SIGNAL If BookId or BookEdition or BookQuantity is Negative while Updating Record
     IF (NEW.BookId < 0) THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Book Id Cannot be Negative';
+    ELSEIF (NEW.BookName = NULL) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Book Name Cannot be NULL';
     ELSEIF (NEW.BookEdition < 0) THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Book Edition Cannot be Negative';
     ELSEIF (NEW.BookQuantity < 0) THEN
@@ -30,9 +56,21 @@ BEGIN
     END IF;
 END //
 
--- Trigger for After Delete
-CREATE TRIGGER DeleteTrigger
-AFTER DELETE 
+
+-- Trigger for After Update
+CREATE TRIGGER AfterUpdateTrigger
+AFTER UPDATE 
+ON Library FOR EACH ROW  
+BEGIN
+    IF (OLD.BookId != NEW.BookId OR OLD.BookName != NEW.BookName OR OLD.BookEdition != NEW.BookEdition) THEN
+	UPDATE Library_Audit SET BookId = NEW.BookId, BookName = NEW.BookName,  BookEdition = NEW.BookEdition WHERE (BookId = NEW.BookId and BookName = OLD.BookName and BookEdition = OLD.BookEdition);
+    END IF;
+END //
+
+
+-- Trigger for Before Delete
+CREATE TRIGGER BeforeDeleteTrigger
+BEFORE DELETE 
 ON Library FOR EACH ROW  
 BEGIN
     -- * Inserting Record in Library_Audit
@@ -68,9 +106,12 @@ UPDATE Library SET BookQuantity = -1 WHERE BookId = 3;
 SELECT * FROM Library;
 SELECT * FROM Library_Audit;
 
--- Drop Trigger UpdateTrigger and DeleteTrigger
-DROP TRIGGER UpdateTrigger;
-DROP TRIGGER DeleteTrigger;
+-- Drop Triggers
+DROP TRIGGER BeforeInsertTrigger;
+DROP TRIGGER AfterInsertTrigger;
+DROP TRIGGER BeforeUpdateTrigger;
+DROP TRIGGER AfterUpdateTrigger;
+DROP TRIGGER BeforeDeleteTrigger;
 
 -- Drop Table Library and Library_Audit
 DROP TABLE Library, Library_Audit;
