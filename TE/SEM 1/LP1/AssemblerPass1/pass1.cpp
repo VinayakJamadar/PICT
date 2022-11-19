@@ -170,12 +170,12 @@ int main(){
                 // poolStart is set to sizeOf(LITTAB)
                 poolStart = LITTAB.size();
             }
-            // Processing ORIGIN
-            else if(opcode == "ORIGIN") {
-                int start = 0;
+            // Processing ORIGIN and EQU
+            else if(opcode == "ORIGIN" or opcode == "EQU") {
+                // Evaluating value of opr1
+                int start = 0, value = 0;
                 // Adding "0+" to Expression(opr1)
                 opr1 = "0+" + opr1;
-                lc = 0;
 
                 // Tokenization of Operands(Tokens) and Operators(Delimiters) from Expression
                 vector<string> delimiter, token;
@@ -189,30 +189,31 @@ int main(){
                 }
                 token.push_back(opr1.substr(start, opr1.size()-start));
 
-                // Evaluating the value of opr1 from generated Operands(Tokens) and Operators(Delimiters)
+                // Evaluating value of opr1 from generated Operands(Tokens) and Operators(Delimiters)
                 for (int i = 0; i < delimiter.size(); i++)
                 {
-                    // Skips the first delimiter "+". Because we added "0+" to Expression(opr1) --> Check Line No 177
+                    // Skips the first delimiter "+". Because we added "0+" to Expression(opr1) --> Check Line No 178
                     if(i) icStr += delimiter[i];
                     if(token[i+1][0] >= '0' and token[i+1][0] <= '9') {
                         icStr += token[i+1];
-                        lc = evaluate(lc, stoi(token[i+1]), delimiter[i]);
+                        value = evaluate(value, stoi(token[i+1]), delimiter[i]);
                     }
                     else {
                         index = getIndex(SYMTAB, token[i+1]);
                         icStr += ("(S, "+to_string(index+1)+")");
-                        lc = evaluate(lc, SYMTAB[index].second, delimiter[i]);
+                        value = evaluate(value, SYMTAB[index].second, delimiter[i]);
                     }
                 }
 
+                // For ORIGIN --> Updating lc to value
+                if(opcode == "ORIGIN") lc = value;
+                // For EQU --> Updating Address of label to value
+                else {
+                    index = getIndex(SYMTAB, label);
+                    SYMTAB[index].second = value;
+                }
+
                 icStr += ("\t"+empty);
-                IC << icStr << endl;
-            }
-            // Processing EQU
-            else if(opcode == "EQU") {
-                index = getIndex(SYMTAB, label);
-                SYMTAB[index].second = SYMTAB[getIndex(SYMTAB, opr1)].second;
-                icStr += ("(S, "+to_string(index+1)+")\t"+empty);
                 IC << icStr << endl;
             }
             // Processing LTORG
