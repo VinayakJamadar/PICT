@@ -185,7 +185,7 @@ int main(){
                 // Evaluating value of opr2 from generated Operands(Tokens) and Operators(Delimiters)
                 for (int i = 0; i < delimiter.size(); i++)
                 {
-                    // Skips the first delimiter "+". Because we added "0+" to Expression(opr2) --> Check Line No 178
+                    // Skips the first delimiter "+". Because we added "0+" to Expression(opr2)
                     if(i) icStr += delimiter[i];
                     if(token[i+1][0] >= '0' and token[i+1][0] <= '9') {
                         icStr += token[i+1];
