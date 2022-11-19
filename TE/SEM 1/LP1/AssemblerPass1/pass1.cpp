@@ -1,6 +1,14 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// Format of input.txt
+// label opcode opr1 opr2
+// Where
+// label --> Either Symbol or empty
+// opcode --> always anyone command from OPTAB
+// opr1 --> Either Register, ConditionalCode or empty
+// opr2 --> Either Symbol, Literal, Expression, Constant or empty 
+
 // This will Generate OPTAB, REG, CONDITIONALCODE
 void generateTABs(auto& OPTAB, auto& REG, auto& CONDITIONALCODE) {
     OPTAB["STOP"] = {"IS", "00"};
@@ -93,7 +101,7 @@ int main(){
         // Generating ic of opcode
         icStr += ("\t("+OPTAB[opcode].first+", "+OPTAB[opcode].second+")\t");
 
-        // Below we are Generating ic of opr1 and opr2. According to Classes
+        // Below ic of opr1 and opr2 generated. According to Classes
 
         // Processing IS (Imperative Statements) Class commands
         if(OPTAB[opcode].first == "IS") {
@@ -101,31 +109,15 @@ int main(){
             if(opr1 != empty) {
                 // If opr1 is Register
                 if(REG[opr1]) icStr += ("("+to_string(REG[opr1])+")\t");
-                // If opr1 is ConditionalCode
-                else if(CONDITIONALCODE[opr1]) icStr += ("("+to_string(CONDITIONALCODE[opr1])+")\t");
-                // If opr1 is Literal
-                else if(opr1.substr(0, 2) == "='") {
-                    index = getIndex(LITTAB, opr1, poolStart);
-                    if(index == -1) LITTAB.push_back({opr1, -1}), index = getIndex(LITTAB, opr1, poolStart);
-                    icStr += ("(L, "+to_string(index+1)+")\t");
-                }
-                // else opr1 is Symbol
-                else {
-                    index = getIndex(SYMTAB, opr1);
-                    if(index == -1) SYMTAB.push_back({opr1, -1}), index = getIndex(SYMTAB, opr1);
-                    icStr += ("(S, "+to_string(index+1)+")\t");
-                }
+                // else opr1 is ConditionalCode
+                else icStr += ("("+to_string(CONDITIONALCODE[opr1])+")\t");
             }
             else icStr += (empty+"\t");
 
             // Processing opr2 (operand2)
             if(opr2 != empty) {
-                // If opr2 is Register
-                if(REG[opr2]) icStr += ("("+to_string(REG[opr2])+")");
-                // If opr2 is ConditionalCode
-                else if(CONDITIONALCODE[opr2]) icStr += ("("+to_string(CONDITIONALCODE[opr2])+")");
                 // If opr2 is Literal
-                else if(opr2.substr(0, 2) == "='") {
+                if(opr2.substr(0, 2) == "='") {
                     index = getIndex(LITTAB, opr2, poolStart);
                     if(index == -1) LITTAB.push_back({opr2, -1}), index = getIndex(LITTAB, opr2, poolStart);
                     icStr += ("(L, "+to_string(index+1)+")");
@@ -146,22 +138,23 @@ int main(){
         // Processing AD (Assembler Directives) Class commands
         else if(OPTAB[opcode].first == "AD") {
             IC << empty;
+            icStr += (empty+"\t");
             // Processing START
             if(opcode == "START") {
-                if(opr1 != empty) lc = stoi(opr1) ;
-                icStr += ("(C, "+to_string(lc)+")\t"+empty);
+                if(opr2 != empty) lc = stoi(opr2) ;
+                icStr += ("(C, "+to_string(lc)+")");
                 IC << icStr << endl;
             }
             // Processing END
             else if(opcode == "END") {
-                icStr += (empty+"\t"+empty);
+                icStr += empty;
                 IC << icStr << endl;
 
                 // Literal processing
                 for (int i = poolStart; i < LITTAB.size(); i++)
                 {
                     LITTAB[i].second = lc;
-                    icStr = "\t(DL, 01)\t(C, "+LITTAB[i].first.substr(2, LITTAB[i].first.size()-3)+")\t"+empty;
+                    icStr = "\t(DL, 01)\t"+empty+"\t(C, "+LITTAB[i].first.substr(2, LITTAB[i].first.size()-3)+")";
                     IC << lc << icStr << endl;
                     ++lc;
                 }
@@ -172,27 +165,27 @@ int main(){
             }
             // Processing ORIGIN and EQU
             else if(opcode == "ORIGIN" or opcode == "EQU") {
-                // Evaluating value of opr1
+                // Evaluating value of opr2
                 int start = 0, value = 0;
-                // Adding "0+" to Expression(opr1)
-                opr1 = "0+" + opr1;
+                // Adding "0+" to Expression(opr2)
+                opr2 = "0+" + opr2;
 
                 // Tokenization of Operands(Tokens) and Operators(Delimiters) from Expression
                 vector<string> delimiter, token;
-                for (int i = 0; i < opr1.size(); i++)
+                for (int i = 0; i < opr2.size(); i++)
                 {
-                    if(opr1[i] == '+' or opr1[i] == '-' or opr1[i] == '*' or opr1[i] == '/') {
-                        delimiter.push_back(string (1, opr1[i]));
-                        token.push_back(opr1.substr(start, i-start));
+                    if(opr2[i] == '+' or opr2[i] == '-' or opr2[i] == '*' or opr2[i] == '/') {
+                        delimiter.push_back(string (1, opr2[i]));
+                        token.push_back(opr2.substr(start, i-start));
                         start = i+1;
                     }
                 }
-                token.push_back(opr1.substr(start, opr1.size()-start));
+                token.push_back(opr2.substr(start, opr2.size()-start));
 
-                // Evaluating value of opr1 from generated Operands(Tokens) and Operators(Delimiters)
+                // Evaluating value of opr2 from generated Operands(Tokens) and Operators(Delimiters)
                 for (int i = 0; i < delimiter.size(); i++)
                 {
-                    // Skips the first delimiter "+". Because we added "0+" to Expression(opr1) --> Check Line No 178
+                    // Skips the first delimiter "+". Because we added "0+" to Expression(opr2) --> Check Line No 178
                     if(i) icStr += delimiter[i];
                     if(token[i+1][0] >= '0' and token[i+1][0] <= '9') {
                         icStr += token[i+1];
@@ -213,19 +206,18 @@ int main(){
                     SYMTAB[index].second = value;
                 }
 
-                icStr += ("\t"+empty);
                 IC << icStr << endl;
             }
             // Processing LTORG
             else {
-                icStr += (empty+"\t"+empty);
+                icStr += (empty);
                 IC << icStr << endl;
 
                 // Literal processing
                 for (int i = poolStart; i < LITTAB.size(); i++)
                 {
                     LITTAB[i].second = lc;
-                    icStr = "\t(DL, 01)\t(C, "+LITTAB[i].first.substr(2, LITTAB[i].first.size()-3)+")\t"+empty;
+                    icStr = "\t(DL, 01)\t"+empty+"\t(C, "+LITTAB[i].first.substr(2, LITTAB[i].first.size()-3)+")";
                     IC << lc << icStr << endl;
                     ++lc;
                 }
@@ -238,17 +230,17 @@ int main(){
 
         // Processing DL (Declaration Statements) Class commands
         else {
-            if(opcode == "DC") opr1 = opr1.substr(1, opr1.size()-2);
+            if(opcode == "DC") opr2 = opr2.substr(1, opr2.size()-2);
 
-            icStr += ("(C, "+opr1+")\t"+empty);
+            icStr += (empty+"\t(C, "+opr2+")");
             index = getIndex(SYMTAB, label);
             if(index == -1) SYMTAB.push_back({label, lc});
             else SYMTAB[index].second = lc;
 
             IC << lc << icStr << endl;
             // Incrementing value of lc by 1 if opcode is DC
-            // Incrementing value of lc by opr1 if opcode is DS
-            lc += (opcode == "DS") ? stoi(opr1) : 1;
+            // Incrementing value of lc by opr2 if opcode is DS
+            lc += (opcode == "DS") ? stoi(opr2) : 1;
         }
     }
 
