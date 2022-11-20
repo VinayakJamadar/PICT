@@ -99,7 +99,7 @@ int main(){
         }
 
         // Generating ic of opcode
-        icStr += ("\t("+OPTAB[opcode].first+", "+OPTAB[opcode].second+")\t");
+        icStr += ("\t("+OPTAB[opcode].first+","+OPTAB[opcode].second+")\t");
 
         // Below ic of opr1 and opr2 generated. According to Classes
 
@@ -120,13 +120,13 @@ int main(){
                 if(opr2.substr(0, 2) == "='") {
                     index = getIndex(LITTAB, opr2, poolStart);
                     if(index == -1) LITTAB.push_back({opr2, -1}), index = getIndex(LITTAB, opr2, poolStart);
-                    icStr += ("(L, "+to_string(index+1)+")");
+                    icStr += ("(L,"+to_string(index+1)+")");
                 }
                 // else opr2 is Symbol
                 else {
                     index = getIndex(SYMTAB, opr2);
                     if(index == -1) SYMTAB.push_back({opr2, -1}), index = getIndex(SYMTAB, opr2);
-                    icStr += ("(S, "+to_string(index+1)+")");
+                    icStr += ("(S,"+to_string(index+1)+")");
                 }
             }
             else icStr += (empty);
@@ -142,7 +142,7 @@ int main(){
             // Processing START
             if(opcode == "START") {
                 if(opr2 != empty) lc = stoi(opr2) ;
-                icStr += ("(C, "+to_string(lc)+")");
+                icStr += ("(C,"+to_string(lc)+")");
                 IC << icStr << endl;
             }
             // Processing END
@@ -154,7 +154,7 @@ int main(){
                 for (int i = poolStart; i < LITTAB.size(); i++)
                 {
                     LITTAB[i].second = lc;
-                    icStr = "\t(DL, 01)\t"+empty+"\t(C, "+LITTAB[i].first.substr(2, LITTAB[i].first.size()-3)+")";
+                    icStr = "\t(DL,01)\t"+empty+"\t(C,"+LITTAB[i].first.substr(2, LITTAB[i].first.size()-3)+")";
                     IC << lc << icStr << endl;
                     ++lc;
                 }
@@ -165,7 +165,8 @@ int main(){
             }
             // Processing ORIGIN and EQU
             else if(opcode == "ORIGIN" or opcode == "EQU") {
-                // Evaluating value of opr2
+                // Evaluating value of opr2 (Expression)
+
                 int start = 0, value = 0;
                 // Adding "0+" to Expression(opr2)
                 opr2 = "0+" + opr2;
@@ -193,7 +194,7 @@ int main(){
                     }
                     else {
                         index = getIndex(SYMTAB, token[i+1]);
-                        icStr += ("(S, "+to_string(index+1)+")");
+                        icStr += ("(S,"+to_string(index+1)+")");
                         value = evaluate(value, SYMTAB[index].second, delimiter[i]);
                     }
                 }
@@ -217,7 +218,7 @@ int main(){
                 for (int i = poolStart; i < LITTAB.size(); i++)
                 {
                     LITTAB[i].second = lc;
-                    icStr = "\t(DL, 01)\t"+empty+"\t(C, "+LITTAB[i].first.substr(2, LITTAB[i].first.size()-3)+")";
+                    icStr = "\t(DL,01)\t"+empty+"\t(C,"+LITTAB[i].first.substr(2, LITTAB[i].first.size()-3)+")";
                     IC << lc << icStr << endl;
                     ++lc;
                 }
@@ -232,7 +233,7 @@ int main(){
         else {
             if(opcode == "DC") opr2 = opr2.substr(1, opr2.size()-2);
 
-            icStr += (empty+"\t(C, "+opr2+")");
+            icStr += (empty+"\t(C,"+opr2+")");
             index = getIndex(SYMTAB, label);
             if(index == -1) SYMTAB.push_back({label, lc});
             else SYMTAB[index].second = lc;
@@ -246,31 +247,31 @@ int main(){
 
     string line;
     // Inserting SYMTAB into SymbolTable.txt
-    ofstream TAB;
-    TAB.open("symbolTable.txt");
+    ofstream TABLE;
+    TABLE.open("symbolTable.txt");
     for (int i = 0; i < SYMTAB.size(); i++)
     {
         line = SYMTAB[i].first + " " + to_string(SYMTAB[i].second);
-        TAB << line << endl;
+        TABLE << line << endl;
     }
-    TAB.close();
+    TABLE.close();
 
     // Inserting LITTAB into literalTable.txt
-    TAB.open("literalTable.txt");
+    TABLE.open("literalTable.txt");
     for (int i = 0; i < LITTAB.size(); i++)
     {
         line = LITTAB[i].first + " " + to_string(LITTAB[i].second);
-        TAB << line << endl;
+        TABLE << line << endl;
     }
-    TAB.close();
+    TABLE.close();
 
     // Inserting POOLTAB into poolTable.txt
-    TAB.open("poolTable.txt");
+    TABLE.open("poolTable.txt");
     for (int i = 0; i < POOLTAB.size(); i++)
     {
-        TAB << POOLTAB[i] << endl;
+        TABLE << POOLTAB[i] << endl;
     }
-    TAB.close();
+    TABLE.close();
 
     INPUT.close(), IC.close();
     return 0;
