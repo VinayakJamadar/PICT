@@ -1,13 +1,16 @@
-#include<bits/stdc++.h>
-using namespace std;
-
-// Format of input.txt
+// IMPORTANT NOTE : 
+// 1. File Format of input.txt
 // label opcode opr1 opr2
 // Where
 // label --> Either Symbol or empty
 // opcode --> always anyone command from OPTAB
 // opr1 --> Either Register, ConditionalCode or empty
-// opr2 --> Either Symbol, Literal, Expression, Constant or empty 
+// opr2 --> Either Symbol, Literal, Expression, Constant or empty
+
+// 2. used "_" as empty
+
+#include<bits/stdc++.h>
+using namespace std;
 
 // This will Generate OPTAB, REG, CONDITIONALCODE
 void generateTABs(auto& OPTAB, auto& REG, auto& CONDITIONALCODE) {
