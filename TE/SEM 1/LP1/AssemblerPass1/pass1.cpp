@@ -148,8 +148,8 @@ int main(){
                 icStr += ("(C,"+to_string(lc)+")");
                 IC << icStr << endl;
             }
-            // Processing END
-            else if(opcode == "END") {
+            // Processing END and LTORG
+            else if(opcode == "END" or opcode == "LTORG") {
                 icStr += empty;
                 IC << icStr << endl;
 
@@ -211,24 +211,6 @@ int main(){
                 }
 
                 IC << icStr << endl;
-            }
-            // Processing LTORG
-            else {
-                icStr += (empty);
-                IC << icStr << endl;
-
-                // Literal processing
-                for (int i = poolStart; i < LITTAB.size(); i++)
-                {
-                    LITTAB[i].second = lc;
-                    icStr = "\t(DL,01)\t"+empty+"\t(C,"+LITTAB[i].first.substr(2, LITTAB[i].first.size()-3)+")";
-                    IC << lc << icStr << endl;
-                    ++lc;
-                }
-                // Inserting poolStart+1 into POOLTAB
-                POOLTAB.push_back(poolStart+1);
-                // poolStart is set to sizeOf(LITTAB)
-                poolStart = LITTAB.size();
             }
         }
 
