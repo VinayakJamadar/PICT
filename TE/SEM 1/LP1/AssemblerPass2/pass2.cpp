@@ -12,6 +12,20 @@ int evaluate(int operand1, int operand2, string operation) {
     else if(operation == "/") return operand1/operand2;
 }
 
+// generating SYMTAB/LITTAB from symbolTable.txt/literalTable.txt
+void generateTable(string tableName, auto& table) {
+    string str;
+    int val;
+    ifstream TABLE;
+    TABLE.open(tableName);
+    // Generating table from tableName
+    while(TABLE.eof() != 1) {
+        TABLE >> str >> val;
+        table.push_back({str, val});
+    }
+    TABLE.close();
+}
+
 int main(){
     // DataStructures SYMTAB, LITTAB
     vector<pair<string, int>> SYMTAB, LITTAB;
@@ -22,24 +36,10 @@ int main(){
     ifstream TABLE, IC;
     ofstream OUTPUT;
 
-    string str;
-    int val;
-    
     // Generating SYMTAB from symbolTable.txt
-    TABLE.open("symbolTable.txt");
-    while(TABLE.eof() != 1) {
-        TABLE >> str >> val;
-        SYMTAB.push_back({str, val});
-    }
-    TABLE.close();
-
+    generateTable("symbolTable.txt", SYMTAB);
     // Generating LITTAB from literalTable.txt
-    TABLE.open("literalTable.txt");
-    while(TABLE.eof() != 1) {
-        TABLE >> str >> val;
-        LITTAB.push_back({str, val});
-    }
-    TABLE.close();
+    generateTable("literalTable.txt", LITTAB);
 
     string lc, opcode, opr1, opr2, machineCode;
     IC.open("ic.txt");
@@ -67,7 +67,7 @@ int main(){
             if(opr2 != empty) {
                 // Evaluating value of opr2 (Expression)
 
-                int start = 0, value = 0, index ;
+                int start = 0, value = 0, index;
                 // Adding "0+" to Expression(opr2)
                 opr2 = "0+" + opr2;
 
