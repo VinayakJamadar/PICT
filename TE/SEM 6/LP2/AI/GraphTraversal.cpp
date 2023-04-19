@@ -30,6 +30,7 @@ class Graph{
             }
         }
     }
+
     void recursiveBFS(Graph const &graph, queue<int> &q, vector<bool> &visited)
     {
         if (q.empty()) {
@@ -48,6 +49,16 @@ class Graph{
         }
         recursiveBFS(graph, q, visited);
     }
+
+    void Display() {
+        for(int i = 0; i < adjList.size(); i++) {
+            cout << i << " -> [ ";
+            for(int j = 0; j < adjList[i].size(); j++) {
+                cout << adjList[i][j] << " ";
+            }
+            cout << "]" << endl;
+        }
+    }
 };
 
 int main(){
@@ -60,8 +71,6 @@ int main(){
 
 
     vector<Edge> edges;
-    vector<bool> visited(v);
-    queue<int> q;
 
 
     cout<<"\nThe Edges must be from 0 to "<<v-1<<endl;
@@ -74,41 +83,46 @@ int main(){
     Graph g(edges,v);
     cout<<"\nGraph Created Successfully!"<<endl;
     while(1){
-        cout<<"\n1.Show Graph representation - ";
-        cout<<"\n2.Depth First Search - "<<endl;
-        cout<<"3.Breath First Search - "<<endl;
+        vector<bool> visited(v, 0);
+        queue<int> q;
+        cout<<"\n1.Display graph."<<endl;
+        cout<<"2.Depth First Search."<<endl;
+        cout<<"3.Breath First Search."<<endl;
+        cout<<"4.Exit."<<endl;
         cout<<"\nEnter the Choice - ";
         cin>>ch;
-        switch(ch){
-            case 1:
-                // g.display();
-                break;
-            case 2:
-                for (int i = 0; i < v; i++)
-                {
-                    if (visited[i] == false) {
-                        g.DFS(g, i, visited);
-                    }
-                }
-                break;
-            case 3:
-                for(int i=0;i<visited.size();i++){
-                    visited[i]=false;
-                }
-                for (int i = 0; i < v; i++)
-                {
-                    if (visited[i] == false)
-                    {
-                        visited[i] = true;
-                        q.push(i);
-                        g.recursiveBFS(g, q, visited);
-                    }
-                }
-                break;
-            default:
-                break;
-
+        if(ch == 1) {
+            cout << "\nDisplay graph : " << endl;
+            g.Display();
         }
+        else if(ch == 2) {
+            cout<<"\nDepth First Search : [";
+            for (int i = 0; i < v; i++) {
+                if (visited[i] == false) {
+                    g.DFS(g, i, visited);
+                }
+            }
+            cout << "]";
+        }
+        else if(ch == 3) {
+            cout<<"\nBreath First Search : [ ";
+            for (int i = 0; i < v; i++) {
+                if (visited[i] == false)
+                {
+                    visited[i] = true;
+                    q.push(i);
+                    g.recursiveBFS(g, q, visited);
+                }
+            }
+            cout << "]";
+        }
+        else if (ch == 4) {
+            cout << "Exit.";
+        }
+        else {
+            cout << "Enter a Valid Input";
+        }
+        cout << endl;
     }
     return 0;
 }
