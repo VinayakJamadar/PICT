@@ -2,3 +2,5 @@
 *.vscode/
 *Notes/
 *node_modules/
+*
+!*.*
