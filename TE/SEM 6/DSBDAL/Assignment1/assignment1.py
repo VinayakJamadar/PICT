@@ -70,7 +70,7 @@ print(df)
 # MinMax normalization Using sklearn
 
 # 1. Using formula
-(df - df.min()) / (df.max() - df.min())
+df = (df - df.min()) / (df.max() - df.min())
 
 # 2. Using built in function
 from sklearn.preprocessing import MinMaxScaler
