@@ -1,13 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
-void swaps(int *a, int *b)
-{
+
+void swaps(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
 }
-void Selection(int A[], int n)
-{
+
+void Selection(int A[], int n) {
     for (int i = 0; i < n; i++)
     {
         int idx = i;
