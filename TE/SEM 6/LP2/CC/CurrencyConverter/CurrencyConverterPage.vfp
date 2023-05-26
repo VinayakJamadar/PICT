@@ -1,0 +1,42 @@
+<apex:page controller="CurrencyConverterController">
+    <apex:form >
+       <apex:pageBlock >
+       		<apex:pageBlockSection >
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Currency 1" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:selectRadio value="{!curr1}">
+                        <apex:selectOption itemValue="Rupee" itemLabel="Rupee" />
+                        <apex:selectOption itemValue="Dollar" itemLabel="Dollar" />
+                        <apex:selectOption itemValue="Pound" itemLabel="Pound" />
+                    </apex:selectRadio>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Value 1" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                	<apex:inputText value="{!val1}"/>
+                </apex:pageBlockSectionItem>
+           	
+                <apex:pageBlockSectionItem ><apex:outputLabel value="Currency 2" /></apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:selectRadio value="{!curr2}">
+                        <apex:selectOption itemValue="Rupee" itemLabel="Rupee" />
+                        <apex:selectOption itemValue="Dollar" itemLabel="Dollar" />
+                        <apex:selectOption itemValue="Pound" itemLabel="Pound" />
+                    </apex:selectRadio>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Result" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                	<apex:inputText value="{!val2}"/>
+                </apex:pageBlockSectionItem>
+           	</apex:pageBlockSection>
+           <apex:pageBlockButtons >
+           		<apex:commandButton value="Convert" action="{!convert}"/>
+           </apex:pageBlockButtons>
+       </apex:pageBlock>
+    </apex:form>
+</apex:page>

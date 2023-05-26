@@ -1,0 +1,28 @@
+public class CurrencyConverterController {
+	public String curr1 {get;set;}
+    public String curr2 {get;set;}
+    public double val1 {get;set;}
+    public double val2 {get;set;}
+    
+    public void convert(){
+        if(curr1==curr2){
+            val1=val2;
+        }
+        else if(curr1=='Rupee' && curr2=='Dollar')
+        {
+            val2 = (val1)/82;
+        }
+        else if(curr2=='Rupee' && curr1=='Dollar')
+        {
+            val2 = 82*val1;
+        }
+        else if(curr1=='Rupee' && curr2 == 'Pound')
+        {
+            val2 = (val1)/100;
+        }
+        else if(curr2=='Rupee' && curr1 == 'Pound')
+        {
+            val2 = val1*100;
+        }
+    }
+}

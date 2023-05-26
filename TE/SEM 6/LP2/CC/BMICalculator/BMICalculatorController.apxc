@@ -1,0 +1,19 @@
+public class BMICalculatorController {
+    public Decimal weight { get; set; }
+    public Decimal height { get; set; }
+    public Decimal bmi { get; private set; }
+    public Boolean hasResult { get; private set; }
+    
+    public void calculateBMI() {
+        // Convert height from centimeters to meters
+        Decimal heightInMeters = height / 100;
+        
+        // Calculate BMI
+        bmi = weight / (heightInMeters * heightInMeters);
+        
+        // Round BMI to two decimal places
+        bmi = bmi.setScale(2);
+        
+        hasResult = true;
+    }
+}
