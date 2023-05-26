@@ -1,0 +1,31 @@
+public class ScientificCalculatorController {   
+    public Double val1 {get;set;}
+    public Double val2 {get;set;}
+    public Double result {get;set;}
+    public String func {get;set;}
+   
+    public void find() {
+        if(func == 'add') {
+            result = val1 + val2;
+        }
+        else if(func == 'sub') {
+            result = val1 - val2;
+        }
+        else if(func == 'div') {
+            result = val1 / val2;
+        }
+        else if(func == 'mul') {
+            result = val1*val2;
+        }
+        else if(func == 'log') {
+            result = math.log10(val1);
+        }
+        else if(func == 'sqrt') {
+            result = math.sqrt(val1);
+        }
+        else {
+            Integer temp =  math.mod(Integer.valueOf(val1) , Integer.valueOf(val2));
+            result = Double.valueOf(temp);
+        }
+    }
+}

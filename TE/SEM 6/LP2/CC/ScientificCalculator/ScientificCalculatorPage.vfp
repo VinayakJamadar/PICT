@@ -1,0 +1,42 @@
+<apex:page controller="ScientificCalculatorController">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Value 1"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:inputText value="{!val1}"/>
+                </apex:pageBlockSectionItem>                          
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Value 2"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:inputText value="{!val2}"/>
+                </apex:pageBlockSectionItem>                         
+                <apex:pageBlockSectionItem >
+                    <apex:selectRadio value="{!func}" layout="pageDirection">
+                        <apex:selectOption itemValue="add" itemLabel="Add"/>
+                        <apex:selectOption itemValue="sub" itemLabel="Subtract"/>
+                        <apex:selectOption itemValue="div" itemLabel="Division"/>
+                        <apex:selectOption itemValue="mod" itemLabel="Modulo Division"/>
+                        <apex:selectOption itemValue="mul" itemLabel="Multiplication" />
+                        <apex:selectOption itemValue="log" itemLabel="Log" />
+                        <apex:selectOption itemValue="sqrt" itemLabel="Square root" />
+                    </apex:selectRadio>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >   
+                </apex:pageBlockSectionItem>       
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Result"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:inputText value="{!result}"/>
+                </apex:pageBlockSectionItem>                                      
+            </apex:pageBlockSection>   
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Find Result" action="{!find}"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
