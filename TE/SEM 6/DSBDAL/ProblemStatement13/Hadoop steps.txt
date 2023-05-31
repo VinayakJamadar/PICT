@@ -1,0 +1,37 @@
+﻿Explanation 1
+
+gedit inl.txt
+cd hadoop-3.3.5/
+cd sbin
+start-dfs.sh
+start-yarn.sh
+jps
+hdfs dfs -mkdir /inl2
+hadoop fs -put /home/hadoop/inl.txt /inl2
+yarn jar /home/hadoop/hadoop-3.3.5/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.5.jar wordcount /gf /o5
+hdfs dfs -cat /o5/part-r-00000
+
+
+
+Explanation 2
+
+1.terminal
+2.gedit sample.txt
+write some contents in 'sample.txt'.
+
+jps(javaruntime env process status)
+stop-all.sh to stop
+
+1.start-dfs.sh
+
+2.start-yarn.sh
+
+3.hadoop fs -mkdir /vinayak (fs/hdfs=file system)
+
+4.hadoop fs -put /input_file_path/sample.txt /vinayak
+
+[Home->Hadoop->share->hadoop->mapreduce]
+
+5.yarn jar map-reduce-example_path/withfilename wordcount /vinayak/sample.txt /outputfilename
+
+6.hadoop fs -cat /outputfilename/part-r-00000

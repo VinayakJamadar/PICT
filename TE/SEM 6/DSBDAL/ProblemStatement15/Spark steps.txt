@@ -1,0 +1,23 @@
+1.terminal
+2.gedit sample.txt
+write some contents in 'sample.txt'.
+
+
+1. spark-shell
+
+2. var first=sc.textFile("inputfile_path/sample.txt")
+
+3. var second=first.flatMap(_.split(" "))
+
+4. var third=second.map((_,1))
+
+5. var fourth=third.reduceByKey(_+_)
+
+6. fourth.foreach(println)
+
+
+
+Oral Questions
+1. spark arch
+2. what is spark
+3. why to use spark
