@@ -23,7 +23,7 @@ def main():
 
     ela_image = calculate_ela(original_image_path, manipulated_image_path, scale)
     ela_image.show()
-    ela_image.save('ela_image1.jpg')
+    ela_image.save('ela_image.jpg')
 
 if __name__ == '__main__':
     main()
